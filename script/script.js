@@ -11,8 +11,6 @@ firstMessage = confirm('Угадай число от 1 до 100');
 console.log(firstMessage);
 
 if (firstMessage == true) {
-
-
   // функция угадай число
   const guessNumber = function() {
     const botNumber = 88;
@@ -27,22 +25,19 @@ if (firstMessage == true) {
         alert('Загаданное число меньше');
         return getNumber();
       }
-  
       if (botNumber > userNumber) {
         alert('Загаданное число больше');
         return getNumber();
       }
-  
       if (!isNumber(userNumber)) {
         alert('Введи число!');
         return getNumber();
       }
-
       if (botNumber == userNumber) {
         alert('Поздравляю! Ты угадал число!');
       }
-      
     };
+    
     return getNumber();
 
   };
