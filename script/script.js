@@ -15,7 +15,18 @@ const startGame = function() {
   if (firstMessage == true) {
     // функция угадай число
     const guessNumber = function() {
-      const botNumber = 88;
+      
+      let botNumber;
+
+      const getRandomIntInclusive = function(min, max) {
+        min = Math.ceil(1);
+        max = Math.floor(100);
+        return Math.floor(Math.random() * (max - min)) + min;
+      };
+
+      botNumber = getRandomIntInclusive();
+      console.log(botNumber);
+
       let userNumber;
 
       // функция завершить игру
