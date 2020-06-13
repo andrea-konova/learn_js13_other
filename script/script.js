@@ -48,27 +48,33 @@ const startGame = function() {
             counter = 10;
             botNumber = getRandomIntInclusive();
             console.log(botNumber);
-            return getNumber();
+            getNumber();
+            return 0;
           } else if (secondMessage == false) {
-            return stopGame();
+            stopGame();
+            return 0;
           }
         }
 
         if (botNumber < userNumber) {
           alert('Загаданное число меньше, осталось попыток: ' + counter);
-          return getNumber();
+          getNumber();
+          return 0;
         } else if (userNumber == null) {
-          return stopGame();
+          stopGame();
+          return 0;
         }
         if (botNumber > userNumber) {
           alert('Загаданное число больше,  осталось попыток: ' + counter);
-          return getNumber();
+          getNumber();
+          return 0;
         } else if (userNumber == null) {
           stopGame();
         }
         if (!isNumber(userNumber)) {
           alert('Введите число!');
-          return getNumber();
+          getNumber();
+          return 0;
         } else if (userNumber == null) {
           stopGame();
         }
@@ -79,11 +85,14 @@ const startGame = function() {
             counter = 10;
             botNumber = getRandomIntInclusive();
             console.log(botNumber);
-            return getNumber();
+            getNumber();
+            return 0;
           } else if (thirdMessage == false) {
-            return stopGame();
+            stopGame();
+            return 0;
           }
-          return startGame();
+          startGame();
+          
         }
       };
       
