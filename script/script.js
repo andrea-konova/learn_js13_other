@@ -9,13 +9,14 @@ const startGame = function() {
 
   let firstMessage;
     
-  firstMessage = confirm('Угадай число от 1 до 100');
+  firstMessage = confirm('Угадайте число от 1 до 100');
   console.log(firstMessage);
 
   if (firstMessage == true) {
     // функция угадай число
     const guessNumber = function() {
       
+      let counter = 10;
       let botNumber;
 
       const getRandomIntInclusive = function(min, max) {
@@ -36,29 +37,52 @@ const startGame = function() {
 
       // функция получить число от пользователя
       const getNumber = function() {
-        userNumber = prompt('Введи число от 1 до 100');
+        userNumber = prompt('Введите число от 1 до 100');
         console.log(userNumber);
 
+        counter--;
+        if (counter == 0) {
+          let secondMessage;
+          secondMessage = confirm('Попытки закончились, хотите сыграть еще?');
+          if (secondMessage == true) {
+            counter = 10;
+            botNumber = getRandomIntInclusive();
+            console.log(botNumber);
+            return getNumber();
+          } else if (secondMessage == false) {
+            return stopGame();
+          }
+        }
+
         if (botNumber < userNumber) {
-          alert('Загаданное число меньше');
+          alert('Загаданное число меньше, осталось попыток: ' + counter);
           return getNumber();
         } else if (userNumber == null) {
           return stopGame();
         }
         if (botNumber > userNumber) {
-          alert('Загаданное число больше');
+          alert('Загаданное число больше,  осталось попыток: ' + counter);
           return getNumber();
         } else if (userNumber == null) {
           stopGame();
         }
         if (!isNumber(userNumber)) {
-          alert('Введи число!');
+          alert('Введите число!');
           return getNumber();
         } else if (userNumber == null) {
           stopGame();
         }
         if (botNumber == userNumber) {
-          alert('Поздравляю! Ты угадал число!');
+          let thirdMessage;
+          thirdMessage = confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?');
+          if (thirdMessage == true) {
+            counter = 10;
+            botNumber = getRandomIntInclusive();
+            console.log(botNumber);
+            return getNumber();
+          } else if (thirdMessage == false) {
+            return stopGame();
+          }
           return startGame();
         }
       };
