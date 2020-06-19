@@ -27,11 +27,17 @@ const render = function() {
       todoList.append(li);
     }
 
-    const btntodoComplete = li.querySelector('.todo-complete');
+    const btnTodoComplete = li.querySelector('.todo-complete');
 
-    btntodoComplete.addEventListener('click', function() {
+    btnTodoComplete.addEventListener('click', function() {
       item.completed = !item.completed;
       render();
+    })
+
+    const btnTodoRemove = li.querySelector('.todo-remove');
+
+    btnTodoRemove.addEventListener('click', function() {
+      li.remove();
     })
   })
 };
@@ -39,12 +45,20 @@ const render = function() {
 todoControl.addEventListener('submit', function(event) {
   event.preventDefault();
   
-  const newTodo = {
-    value: headerInput.value,
-    completed: false 
+  if (headerInput.value === '') {
+    console.log('Ты че творишь???');
+    render();
+  } else {
+    console.log("Поехали");
+    const newTodo = {
+      value: headerInput.value,
+      completed: false 
+    }
+  
+    todoData.push(newTodo);
+    headerInput.value = '';
   }
-
-  todoData.push(newTodo);
+  
 
   render();
 });
