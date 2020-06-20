@@ -5,8 +5,11 @@ const todoControl = document.querySelector('.todo-control'),
   todoList = document.querySelector('.todo-list'),
   todoCompleted = document.querySelector('.todo-completed');
 
-const todoData = [];
+let todoData = [];
 
+if (localStorage.getItem('todo')) {
+  todoData = JSON.parse(localStorage.getItem('todo'));
+}
 
 const render = function() {
   let json = JSON.stringify(todoData);
@@ -15,7 +18,7 @@ const render = function() {
   todoList.textContent = '';
   todoCompleted.textContent = '';
 
-  todoData.forEach(function(item) {
+  todoData.forEach(function(item, i) {
     const li = document.createElement('li');
     li.classList.add('todo-item');
 
@@ -35,13 +38,16 @@ const render = function() {
 
     btnTodoComplete.addEventListener('click', function() {
       item.completed = !item.completed;
+      localStorage.setItem('todo', JSON.stringify(todoData));
       render();
     })
 
     const btnTodoRemove = li.querySelector('.todo-remove');
 
     btnTodoRemove.addEventListener('click', function() {
-      li.remove();
+      todoData.splice(i, 1); // нужно доработать
+      localStorage.setItem('todo', JSON.stringify(todoData));
+      render();
     })
   })
 };
@@ -50,21 +56,22 @@ todoControl.addEventListener('submit', function(event) {
   event.preventDefault();
   
   if (headerInput.value === '') {
-    console.log('Ты че творишь');
-    render();
+    return;
   } else {
-    console.log("Поехали");
     const newTodo = {
       value: headerInput.value,
       completed: false 
     }
   
     todoData.push(newTodo);
+    localStorage.setItem('todo', JSON.stringify(todoData));
     headerInput.value = '';
   }
   
 
   render();
 });
+
+
 
 render();
