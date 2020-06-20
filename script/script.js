@@ -7,7 +7,11 @@ const todoControl = document.querySelector('.todo-control'),
 
 const todoData = [];
 
+
 const render = function() {
+  let json = JSON.stringify(todoData);
+  console.log(json);
+
   todoList.textContent = '';
   todoCompleted.textContent = '';
 
@@ -46,7 +50,7 @@ todoControl.addEventListener('submit', function(event) {
   event.preventDefault();
   
   if (headerInput.value === '') {
-    console.log('Ты че творишь???');
+    console.log('Ты че творишь');
     render();
   } else {
     console.log("Поехали");
