@@ -50,6 +50,7 @@ class Todo {
         key: this.generateKey()
       };
       this.todoDate.set(newTodo.key, newTodo);
+      this.input.value = '';
       this.render();
     } else {
       alert('Нельзя добавить пустое дело!');
@@ -62,20 +63,24 @@ class Todo {
   }
 
   deleteItem() {
-
+    // this.todoDate.forEach((i) =>{
+    //   splice(i, 1);
+    // });
   }
 
   completedItem() {
-
+    // this.todoDate.forEach((i) =>{
+    //   console.log(i);
+    // });
   }
 
   handler() {
-    const todoButtons = document.querySelector('.todo-buttons');
+    const todoСontainer = document.querySelector('.todo-container');
 
-    todoButtons.addEventListener('click', event => {
+    todoСontainer.addEventListener('click', event => {
       const target = event.target;
-      console.log(this);
-      if (target.classList.contains('todo-remove')) {
+
+      if (!target.classList.contains('todo-remove')) {
         console.log('Кнопка удалить');
         this.deleteItem();
       } else {
