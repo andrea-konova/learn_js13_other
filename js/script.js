@@ -63,32 +63,40 @@ class Todo {
   }
 
   deleteItem() {
-    // this.todoDate.forEach((i) =>{
-    //   splice(i, 1);
-    // });
+    for (let key of this.todoDate.keys()) {
+      if (key === todo.key) {
+        this.todoDate.delete(todo.key);
+        localStorage.setItem('toDoList', JSON.stringify(this.todoData));
+        this.render();
+        console.log('Получилось');
+      }
+    }
+
   }
 
   completedItem() {
-    // this.todoDate.forEach((i) =>{
-    //   console.log(i);
-    // });
+    this.todoDate.forEach((key) => {
+      this.completed = true;
+      console.log('Поехали');
+    });
   }
 
   handler() {
-    const todoСontainer = document.querySelector('.todo-container');
+    const todoContainer = document.querySelector('.todo-container');
 
-    todoСontainer.addEventListener('click', event => {
+      todoContainer.addEventListener('click', event => {
       const target = event.target;
 
-      if (!target.classList.contains('todo-remove')) {
+      if (target.className === 'todo-remove') {
         console.log('Кнопка удалить');
         this.deleteItem();
-      } else {
+      } else if (target.className === 'todo-complete') {
         console.log('Кнопка выполнить');
         this.completedItem();
       }
 
-    });
+    }); 
+
   }
 
   init() {
