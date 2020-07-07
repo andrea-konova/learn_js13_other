@@ -69,23 +69,15 @@ class Todo {
         this.render();
       }
     }
-
   }
 
   completedItem(todoKey) {
 
     this.todoDate.forEach((item, key) => {
-      if (key === todoKey && item.completed === false) {
-        item.completed = 'true';
+      if (key === todoKey) {
+        item.completed = !item.completed;
         this.render();
       }
-      if (key === todoKey && item.completed === true) {
-        console.log(item.completed);
-        item.completed = 'false';
-        console.log(item.completed);
-        this.render();
-      }
-
     });
   }
 
