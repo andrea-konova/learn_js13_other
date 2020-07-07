@@ -62,40 +62,43 @@ class Todo {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   }
 
-  deleteItem() {
-    for (let key of this.todoDate.keys()) {
-      if (key === todo.key) {
-        this.todoDate.delete(todo.key);
-        localStorage.setItem('toDoList', JSON.stringify(this.todoData));
+  deleteItem(todoKey) {
+    for (const key of this.todoDate.keys()) {
+      if (key === todoKey) {
+        this.todoDate.delete(todoKey);
         this.render();
-        console.log('Получилось');
       }
     }
 
   }
 
-  completedItem() {
-    this.todoDate.forEach((key) => {
-      this.completed = true;
-      console.log('Поехали');
+  completedItem(todoKey) {
+    this.todoDate.forEach(key => {
+      if (key === todoKey) {
+        console.log(todoKey);
+      }
+      // this.completed = true;
+      console.log(key);
     });
   }
 
   handler() {
     const todoContainer = document.querySelector('.todo-container');
 
-      todoContainer.addEventListener('click', event => {
+    todoContainer.addEventListener('click', event => {
       const target = event.target;
+      const  currentItem = target.closest('.todo-item');
+
 
       if (target.className === 'todo-remove') {
-        console.log('Кнопка удалить');
-        this.deleteItem();
+        const todoKey = currentItem.key;
+        this.deleteItem(todoKey);
+        console.log(todoKey);
       } else if (target.className === 'todo-complete') {
-        console.log('Кнопка выполнить');
         this.completedItem();
       }
 
-    }); 
+    });
 
   }
 
