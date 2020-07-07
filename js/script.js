@@ -73,12 +73,19 @@ class Todo {
   }
 
   completedItem(todoKey) {
-    this.todoDate.forEach(key => {
-      if (key === todoKey) {
-        console.log(todoKey);
+
+    this.todoDate.forEach((item, key) => {
+      if (key === todoKey && item.completed === false) {
+        item.completed = 'true';
+        this.render();
       }
-      // this.completed = true;
-      console.log(key);
+      if (key === todoKey && item.completed === true) {
+        console.log(item.completed);
+        item.completed = 'false';
+        console.log(item.completed);
+        this.render();
+      }
+
     });
   }
 
@@ -87,15 +94,16 @@ class Todo {
 
     todoContainer.addEventListener('click', event => {
       const target = event.target;
-      const  currentItem = target.closest('.todo-item');
+      const currentItem = target.closest('.todo-item');
 
 
       if (target.className === 'todo-remove') {
         const todoKey = currentItem.key;
         this.deleteItem(todoKey);
-        console.log(todoKey);
-      } else if (target.className === 'todo-complete') {
-        this.completedItem();
+      }
+      if (target.className === 'todo-complete') {
+        const todoKey = currentItem.key;
+        this.completedItem(todoKey);
       }
 
     });
